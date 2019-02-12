@@ -30,11 +30,28 @@ def profile(request):
 @login_required
 def profile_experience_write(request):
     if request.method == 'POST':
-        form = Form(request.POST)
+        form = ExperienceForm(request.POST)
         if form.is_valid():
             form.save()
         return HttpResponseRedirect('/profile') # need url
     else:
-        form = Form()
+        form = ExperienceForm()
     
     return render(request, 'foradmin/profile_experience_write.html', {'form':form})
+
+@login_required
+def profile_experience_update(request, pk):
+    experience = Experience.objects.get(pk = pk)
+    form = ExperienceForm(request.POST or None, instance = experience)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/profile')
+    return render(request, 'foradmin/profile_experience_write.html', {'form':form})
+
+@login_required
+def profile_experience_delete(request, pk):
+    experience = Experience.objects.get(pk = pk)
+    experience.delete()
+    return HttpResponseRedirect('/profile')
+
+

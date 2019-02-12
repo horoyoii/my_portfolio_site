@@ -20,13 +20,13 @@
   <link href='{% static "profile/vendor/fontawesome-free/css/all.min.css" %}' rel="stylesheet">
   
   <!-- Custom styles for this template -->
-  <link href='{% static "profile/css/resume.min.css" %}' rel="stylesheet">
+  <link href='{% static "profile/css/resume.css" %}' rel="stylesheet">
 
 </head>
 
 <body id="page-top">
 
-  <!-- Navigation -->
+  <!--  upper Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,11 +55,12 @@
 
   <!---->
 
+  <!--  side Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
     <a class="navbar-brand js-scroll-trigger" href="#page-top">
       <span class="d-block d-lg-none">Clarence Taylor</span>
       <span class="d-none d-lg-block">
-        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="../../static/profile/img/profile.jpg" alt="">
+        <a href="/admin"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="../../static/profile/img/profile.jpg" alt=""></a>
       </span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,16 +97,6 @@
         <h1 class="mb-0">이영민
           <span class="text-primary"></span>
         </h1>
-      <!--
-        {% if user.is_authenticated %}
-            <h1 class="mb-0">이영민
-          <span class="text-primary"></span>
-        </h1>
-        {% else %}
-            
-        {% endif %}
-        -->
-
         <div class="subheading mb-5">3542 Berry Street · Cheyenne Wells, CO 80810 · (317) 585-8468 ·
           <a href="mailto:name@email.com">name@email.com</a>
         </div>
@@ -131,24 +122,43 @@
 
     <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="experience">
       <div class="w-100">
-        <h2 class="mb-5">Experience</h2>
-        
-        {% if user.is_authenticated %}
-            <a href="/profile/experience/write"><h4>추가</h4></a>
+         {% if user.is_authenticated %}
+            <form style="display: inline">
+                <input class="MyButton" type="button" value="추가" 
+                onclick="window.location.href='/profile/experience/write'" />
+                </form>
         {% endif %}
-
+        <h2 class="mb-5">Experience</h2>
+      
         {% for experience in experienceList %}
+        
           <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
             <h3 class="mb-0">{{experience.title}}</h3>
             <div class="subheading mb-3">{{experience.subtitle}}</div>
             <p>{{experience.contents}}</p>
+
+             
           </div>
           <div class="resume-date text-md-right">
-            <span class="text-primary">{{experience.period}}</span>
+            <span class="text-primary" style="display: block">{{experience.period}}</span>
+            {% if user.is_authenticated %}
+             <span class = "btnSet">
+              <form style="display: inline">
+                <input class="MyButton" type="button" value="수정" 
+                onclick="window.location.href='/profile/experience/edit/{{experience.pk}}'" /></form>
+              <form style="display: inline">
+                <input class="MyButton" type="button" value="삭제" 
+                onclick="window.location.href='/profile/experience/delete/{{experience.pk}}'" /></form>
+             </span>
+            {% endif %}
+ 
           </div>
         </div>
-
+        
+          
+        
+        
         <!--TODO: U / D will be implemented here 
         <h4>수정</h4><h4>삭제</h4>
         -->

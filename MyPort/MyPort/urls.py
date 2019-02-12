@@ -24,7 +24,8 @@ urlpatterns = [
     path('', index, name = 'index'),
     path('profile/', profile, name='profile'),
     path('profile/experience/write', profile_experience_write, name='pew'),
-    
+    path('profile/experience/edit/<int:pk>', profile_experience_update, name='peu'),
+    path('profile/experience/delete/<int:pk>', profile_experience_delete, name='ped'),
     ##=====================================================
     # For Admin
     

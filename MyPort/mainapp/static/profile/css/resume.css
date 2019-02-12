@@ -190,3 +190,38 @@ a {
 a:hover, a:focus, a:active {
   color: #824027;
 }
+
+
+.btn {
+  background-color: #555555; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+}
+
+
+.btnSet {
+  float: right;
+  display: block;
+}
+
+input.MyButton {
+  margin: 5px;
+  background-color: #555555; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline;
+  font-size: 15px;
+  }
+  input.MyButton:hover {
+  color: #ffff00;
+  background: #000;
+  border: 1px solid #fff;
+  }
