@@ -1,0 +1,18 @@
+<!doctype html>
+
+<head>
+  <title>WEB1HTML</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <h1>Hello World</h1>
+    <form action = "" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+
+        <button type="submit" name="btn btn-primary">저장</button>
+    </form>
+
+</body>

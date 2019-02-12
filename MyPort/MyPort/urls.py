@@ -17,9 +17,17 @@ from django.contrib import admin
 from django.urls import path
 from mainapp.views import *
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name = 'index'),
     path('profile/', profile, name='profile'),
+    path('profile/experience/write', profile_experience_write, name='pew'),
+    
+    ##=====================================================
+    # For Admin
+    
+
 
 ]

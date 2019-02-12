@@ -1,9 +1,40 @@
 from django.shortcuts import render
-
+from mainapp.forms import *
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 # Create your views here.
 
 def index(request):
     return render(request, 'mainapp/index.html', {})
 
 def profile(request):
-    return render(request, 'mainapp/profile.html', {})
+    experienceList = Experience.objects.all()
+    return render(request, 'mainapp/profile.html', {'experienceList' : experienceList})
+
+
+
+
+
+
+
+
+
+
+
+## ===================================================================================================
+# Only For Master
+## ===================================================================================================
+
+
+
+@login_required
+def profile_experience_write(request):
+    if request.method == 'POST':
+        form = Form(request.POST)
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect('/profile') # need url
+    else:
+        form = Form()
+    
+    return render(request, 'foradmin/profile_experience_write.html', {'form':form})
