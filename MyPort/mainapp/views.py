@@ -10,8 +10,8 @@ def index(request):
 
 def profile(request):
     experienceList = Experience.objects.all().order_by('-period') # to use the order by func, needed to import connection from django.db
-
-    return render(request, 'mainapp/profile.html', {'experienceList' : experienceList})
+    skillsList = Skills.objects.all()
+    return render(request, 'mainapp/profile.html', {'experienceList' : experienceList, 'skillsList' : skillsList})
 
 
 
@@ -57,3 +57,14 @@ def profile_experience_delete(request, pk):
     return HttpResponseRedirect('/profile')
 
 
+@login_required
+def profile_skills_write(request):
+    if request.method == 'POST':
+        form = SkillsForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect('/profile') # need url
+    else:
+        form = SkillsForm()
+    
+    return render(request, 'foradmin/profile_experience_write.html', {'form':form})

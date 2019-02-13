@@ -26,8 +26,7 @@ urlpatterns = [
     path('profile/experience/write', profile_experience_write, name='pew'),
     path('profile/experience/edit/<int:pk>', profile_experience_update, name='peu'),
     path('profile/experience/delete/<int:pk>', profile_experience_delete, name='ped'),
-    ##=====================================================
-    # For Admin
+     path('profile/skills/write', profile_skills_write, name='pes'),
     
 
 
