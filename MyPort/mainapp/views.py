@@ -2,13 +2,15 @@ from django.shortcuts import render
 from mainapp.forms import *
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
+from django.db import connection
 # Create your views here.
 
 def index(request):
     return render(request, 'mainapp/index.html', {})
 
 def profile(request):
-    experienceList = Experience.objects.all()
+    experienceList = Experience.objects.all().order_by('-period') # to use the order by func, needed to import connection from django.db
+
     return render(request, 'mainapp/profile.html', {'experienceList' : experienceList})
 
 
