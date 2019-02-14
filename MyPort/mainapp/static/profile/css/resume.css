@@ -55,6 +55,7 @@ p.lead {
   font-weight: 500;
   font-family: 'Saira Extra Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   font-size: 1.5rem;
+  margin-bottom: 5px;
 }
 
 .social-icons a {
@@ -340,4 +341,25 @@ input.MyButton {
 /* Add some padding inside the card container */
 .container {
   padding: 2px 16px;
+}
+
+.myList{
+  font-size: 17px;
+  list-style: none;
+  margin-left:10px; 
+  padding:0px;
+  padding-inline-start: 0px;
+}
+
+#blog-icon {
+  display: inline-block;
+  height: 4.0rem;
+  width: 4.0rem;
+  background-color: #495057;
+  color: #fff !important;
+  /*border-radius: 100%;*/
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 3.5rem;
+  margin-right: 1rem;
 }

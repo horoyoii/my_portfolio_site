@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from mainapp.views import *
 
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,8 +27,14 @@ urlpatterns = [
     path('profile/experience/write', profile_experience_write, name='pew'),
     path('profile/experience/edit/<int:pk>', profile_experience_update, name='peu'),
     path('profile/experience/delete/<int:pk>', profile_experience_delete, name='ped'),
-     path('profile/skills/write', profile_skills_write, name='pes'),
-    
-
+    path('profile/skills/write', profile_skills_write, name='pes'),
+    path('profile/myprofile/edit', profile_myprofile_edit, name='pme'),
+    path('index/about/write', index_about_write, name='iaw'),
+    path('profile/timeline/edit/<int:pk>', index_about_update, name='iau'),
+    path('profile/timeline/delete/<int:pk>', index_about_delete, name='iad'),
 
 ]
+
+# this is needed to serve the sources 
+# and with this, don't need to indicate all the path of the stored data
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

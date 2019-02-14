@@ -11,4 +11,12 @@ class SkillsForm(ModelForm):
         model = Skills
         fields=['title', 'grade', 'contents','type']
 
+class MyProfileForm(ModelForm):
+    class Meta:
+        model = MyProfile
+        fields=['name', 'email', 'position', 'intro','interests']
 
+class TimeLineForm(ModelForm):
+    class Meta:
+        model = TimeLine
+        fields=['date', 'title', 'subtitle', 'contents', 'image', 'cover']

@@ -20,7 +20,7 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
   <!-- Custom styles for this template -->
-  <link href='{% static "mainapp/css/clean-blog.min.css" %}' rel="stylesheet">
+  <link href='{% static "mainapp/css/clean-blog.css" %}' rel="stylesheet">
 
 </head>
 
@@ -68,69 +68,94 @@
   </header>
 
   <!-- Main Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">
-              Man must explore, and this is exploration at its greatest
-            </h2>
-            <h3 class="post-subtitle">
-              Problems look mighty small from 150 miles up
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on September 24, 2019</p>
+  <!-- About -->
+
+  <section id="about">
+
+        {% if user.is_authenticated %}
+            <form style="display: inline">
+                <input class="MyButton" type="button" value="추가" 
+                onclick="window.location.href='/index/about/write'" />
+                </form>
+        {% endif %}
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase">About</h2>
+          <h3 class="section-subheading text-muted">l'existence précède l'essence</h3>
         </div>
-        <hr>
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">
-              I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
-            </h2>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on September 18, 2019</p>
-        </div>
-        <hr>
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">
-              Science has not yet mastered prophecy
-            </h2>
-            <h3 class="post-subtitle">
-              We predict too much for the next year and yet far too little for the next ten.
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on August 24, 2019</p>
-        </div>
-        <hr>
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">
-              Failure is not an option
-            </h2>
-            <h3 class="post-subtitle">
-              Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on July 8, 2019</p>
-        </div>
-        <hr>
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="timeline">
+            {% for timeline in timelineList%}
+
+              <li class="hiddenLi">
+                {% if user.is_authenticated %}
+                  <span class = "btnSet">
+                    <form style="display: inline">
+                      <input class="MyButton" type="button" value="수정" 
+                      onclick="window.location.href='/profile/timeline/edit/{{timeline.pk}}'" /></form>
+                    <form style="display: inline">
+                      <input class="MyButton" type="button" value="삭제" 
+                      onclick="window.location.href='/profile/timeline/delete/{{timeline.pk}}'" /></form>
+                  </span>
+                {% endif %}
+              </li>
+            
+              {% if forloop.counter0|divisibleby:2 %}
+                <li>
+              <div class="timeline-image">
+                <img class="rounded-circle img-fluidd" src="{{ timeline.image.url }}" alt="">
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <h4>{{timeline.date}}</h4>
+                  <h4 class="subheading">{{timeline.title}}</h4>
+                </div>
+                <div class="timeline-body">
+                  <p class="text-muted">{{timeline.contents | linebreaksbr}} </p>
+                </div>
+              </div>
+              
+            </li>
+              
+              {% else %}
+              <li class="timeline-inverted">
+              <div class="timeline-image">
+                <img class="rounded-circle img-fluidd" src="{{ timeline.image.url }}" alt="">
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <h4>{{timeline.date}}</h4>
+                  <h4 class="subheading">{{timeline.title}}</h4>
+                </div>
+                <div class="timeline-body">
+                  <p class="text-muted">{{timeline.contents | linebreaksbr}}</p>
+                </div>
+              </div>
+            </li>
+
+              {% endif %}              
+            {% endfor %}
+  
+          
+
+            <li class="timeline-inverted">
+              <div class="timeline-image">
+                <h4>Be Part
+                  <br>Of Our
+                  <br>Story!</h4>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+
 
   <hr>
 
@@ -175,8 +200,22 @@
   <script src='{% static "mainapp/vendor/jquery/jquery.min.js" %}'></script>
   <script src='{% static "mainapp/vendor/bootstrap/js/bootstrap.bundle.min.js" %}'></script>
 
+  <!-- Plugin JavaScript -->
+  <script src='{% static "mainapp/vendor/jquery-easing/jquery.easing.min.js" %}'></script>
+
+
   <!-- Custom scripts for this template -->
   <script src='{% static "mainapp/js/clean-blog.min.js" %}'></script>
+  
+  <!-- Contact form JavaScript -->
+  <script src="js/jqBootstrapValidation.js"></script>
+  <script src="js/contact_me.js"></script>
+
+
+  <!--For timeline -->
+  <!-- Custom scripts for this template -->
+  <script src='{% static "mainapp/js/agency.min.js" %}'></script>
+
 
 </body>
 

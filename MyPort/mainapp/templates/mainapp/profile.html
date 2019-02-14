@@ -24,7 +24,7 @@
 
   <!-- W3c-->
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+  
 </head>
 
 <body id="page-top">
@@ -63,7 +63,7 @@
     <a class="navbar-brand js-scroll-trigger" href="#page-top">
       <span class="d-block d-lg-none">Clarence Taylor</span>
       <span class="d-none d-lg-block">
-        <a href="/admin"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="../../static/profile/img/profile.jpg" alt=""></a>
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="../../static/profile/img/profile.jpg" alt="">
       </span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,26 +98,26 @@
   <div class="container-fluid p-0">
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
       <div class="w-100">
-      
-        <h1 class="mb-0">이영민
+        {% if user.is_authenticated %}
+              <form style="display: inline">
+                <input class="MyButton" type="button" value="프로필 수정" 
+                onclick="window.location.href='/profile/myprofile/edit'" /></form>
+            {% endif %}
+        <h1 class="mb-0">{{myprofile.name}}
           <span class="text-primary"></span>
         </h1>
-        <div class="subheading mb-5">무친 개발자 · 학생 · 010-****-**** ·
-          <a href="mailto:name@email.com">demonic3540@naver.com</a>
+        <div class="subheading mb-5">{{myprofile.position}}
+          <a href="mailto:demonic3540@naver.com">{{myprofile.email}}</a>
         </div>
         <p class="lead mb-5">만들고 싶은 것을 만드는 개발자입니다.</p>
+        
         <div class="social-icons">
-          <a href="https://naver.com">
-            <i class="fab fa-linkedin-in"></i>
+
+          <a href="https://blog.naver.com/demonic3540">
+            <img id="blog-icon" src="../../static/profile/img/blog.jpg" alt="">
           </a>
           <a href="https://github.com/horoyoii">
             <i class="fab fa-github"></i>
-          </a>
-          <a href="#">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="#">
-            <i class="fab fa-facebook-f"></i>
           </a>
         </div>
       </div>
@@ -127,7 +127,7 @@
 
     <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="experience">
       <div class="w-100">
-         {% if user.is_authenticated %}
+        {% if user.is_authenticated %}
             <form style="display: inline">
                 <input class="MyButton" type="button" value="추가" 
                 onclick="window.location.href='/profile/experience/write'" />
@@ -141,7 +141,7 @@
           <div class="resume-content">
             <h3 class="mb-0">{{experience.title}}</h3>
             <div class="subheading mb-3">{{experience.subtitle}}</div>
-            <p>{{experience.contents}}</p>
+            <p>{{experience.contents | linebreaksbr }}</p>
 
              
           </div>
@@ -160,13 +160,6 @@
  
           </div>
         </div>
-        
-          
-        
-        
-        <!--TODO: U / D will be implemented here 
-        <h4>수정</h4><h4>삭제</h4>
-        -->
         {%endfor%}
 
       </div>
@@ -210,38 +203,65 @@
 
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="skills">
       <div class="w-100">
-
-        {% if user.is_authenticated %}
+         {% if user.is_authenticated %}
             <form style="display: inline">
                 <input class="MyButton" type="button" value="추가" 
                 onclick="window.location.href='/profile/skills/write'" />
                 </form>
-        {% endif %}
+          {% endif %}
+
         <h2 class="mb-5">Skills</h2>
 
         <div class="subheading mb-3">Programming Languages</div>
-          <ul class="fa-ul mb-0">
-          {% for skills in skillsList %}
-            <li>
-              <div class="card">
-                <div class="container">
-                  <h5><b>{{skills.title}}</b></5>
-                  <h6>{{skills.grade}}</h6> 
-                  <p>{{skills.contents}}</p> 
-                </div>
-              </div>
-            </li>          
+        <ul class="fa-ul mb-0 myList">
+           {% for skills in skillsList %}
+            {% if skills.type == 'PL'%}
+              <li>
+                {{skills.title}}
+              </li>
+            {% endif %}
           {%endfor%}
-
-          </ul>
-        </div>
+        </ul>
         
-                  
+        <br>
+        <div class="subheading mb-3">Frameworks
+        </div>
+        <ul class="fa-ul mb-0 myList">
+           {% for skills in skillsList %}
+            {% if skills.type == 'FW' %}
+              <li>
+                {{skills.title}}
+              </li>
+            {% endif %}
+          {%endfor%}
+        </ul>
 
+        <br>
+        <div class="subheading mb-3">Database</div>
+        <ul class="fa-ul mb-0 myList">
+           {% for skills in skillsList %}
+            {% if skills.type == 'DB' %}
+              <li>
+                {{skills.title}}
+              </li>
+            {% endif %}
+          {%endfor%}
+        </ul>
 
-       
+        <br>
+        <div class="mb-3 subheading">Dev Libraray</div>
+        <ul class="fa-ul mb-0 myList">
+           {% for skills in skillsList %}
+            {% if skills.type == 'LB' %}
+              <li>
+                {{skills.title}}
+              </li>
+            {% endif %}
+          {%endfor%}
+        </ul>
 
-        <div class="subheading mb-3">Dev Tools</div>
+        <br>
+        <div class="subheading mb-3">Tools</div>
         <ul class="fa-ul mb-0">
           <li>
             <i class="fa-li fa fa-check"></i>
@@ -258,37 +278,36 @@
         </ul>
       </div>
 
-      <div class="subheading mb-3">Dev Tools</div>
-        <ul class="fa-ul mb-0">
-          <li>
-            <i class="fa-li fa fa-check"></i>
-            Mobile-First, Responsive Design</li>
-          <li>
-            <i class="fa-li fa fa-check"></i>
-            Cross Browser Testing &amp; Debugging</li>
-          <li>
-            <i class="fa-li fa fa-check"></i>
-            Cross Functional Teams</li>
-          <li>
-            <i class="fa-li fa fa-check"></i>
-            Agile Development &amp; Scrum</li>
-        </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       </div>
-
-      
-
-      </div>
-
-
-      
     </section>
+
+
 
     <hr class="m-0">
 
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="interests">
       <div class="w-100">
         <h2 class="mb-5">Interests</h2>
-        <p>Apart from being a web developer, I enjoy most of my time being outdoors. In the winter, I am an avid skier and novice ice climber. During the warmer months here in Colorado, I enjoy mountain biking, free climbing, and kayaking.</p>
+        <p>{{myprofile.interesrts}}</p>
         <p class="mb-0">When forced indoors, I follow a number of sci-fi and fantasy genre movies and television shows, I am an aspiring chef, and I spend a large amount of my free time exploring the latest technology advancements in the front-end web development world.</p>
       </div>
     </section>
