@@ -42,10 +42,10 @@
             <a class="nav-link" href="/profile">Profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="post.html">Projects</a>
+            <a class="nav-link" href="/projects">Projects</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link" href="/contact">Contact</a>
           </li>
         </ul>
       </div>
@@ -53,14 +53,14 @@
   </nav>
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('../../static/mainapp/img/home-bg2.jpg')">
+  <header class="masthead" style="background-image: url('../../static/mainapp/img/home-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>푸하하하하</h1>
-            <span class="subheading">A Blog Theme by Start Bootstrap</span>
+            <h1>Hello, I'm YeongMin</h1>
+            <span class="subheading">Passionate Creative Versatile Developer</span>
           </div>
         </div>
       </div>
@@ -92,8 +92,9 @@
           <ul class="timeline">
             {% for timeline in timelineList%}
 
-              <li class="hiddenLi">
+              
                 {% if user.is_authenticated %}
+                <li class="hiddenLi">
                   <span class = "btnSet">
                     <form style="display: inline">
                       <input class="MyButton" type="button" value="수정" 
@@ -102,8 +103,9 @@
                       <input class="MyButton" type="button" value="삭제" 
                       onclick="window.location.href='/profile/timeline/delete/{{timeline.pk}}'" /></form>
                   </span>
+                </li>
                 {% endif %}
-              </li>
+              
             
               {% if forloop.counter0|divisibleby:2 %}
                 <li>
@@ -145,9 +147,10 @@
 
             <li class="timeline-inverted">
               <div class="timeline-image">
-                <h4>Be Part
-                  <br>Of Our
-                  <br>Story!</h4>
+                <h4>To be
+                  
+                  <br>Continued
+                  <br>...!</h4>
               </div>
             </li>
           </ul>
@@ -165,22 +168,7 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <ul class="list-inline text-center">
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
+  
             <li class="list-inline-item">
               <a href="https://github.com/horoyoii">
                 <span class="fa-stack fa-lg">
@@ -190,7 +178,7 @@
               </a>
             </li>
           </ul>
-          <p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
+          <p class="copyright text-muted">Copyright &copy; Hello world?? 2019</p>
         </div>
       </div>
     </div>

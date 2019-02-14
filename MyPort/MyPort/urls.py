@@ -32,6 +32,8 @@ urlpatterns = [
     path('index/about/write', index_about_write, name='iaw'),
     path('profile/timeline/edit/<int:pk>', index_about_update, name='iau'),
     path('profile/timeline/delete/<int:pk>', index_about_delete, name='iad'),
+    path('projects/', projects, name = 'project'),
+    path('contact/', contact, name = 'contact'),
 
 ]
 

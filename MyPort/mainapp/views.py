@@ -6,7 +6,7 @@ from django.db import connection
 # Create your views here.
 
 def index(request):
-    timelineList = TimeLine.objects.all().order_by('date')
+    timelineList = TimeLine.objects.all().order_by('subtitle')
     return render(request, 'mainapp/index.html', 
         {'timelineList':timelineList
         })
@@ -22,8 +22,13 @@ def profile(request):
         'myprofile' : myprofile
         })
 
+def projects(request):
 
+    return render(request, 'mainapp/underconstruction.html')
 
+def contact(request):
+    
+    return render(request, 'mainapp/underconstruction.html')
 
 
 
