@@ -431,22 +431,59 @@
         </ul>
 
         <br>
-        <div class="subheading mb-3">Tools</div>
-        <ul class="fa-ul mb-0">
-          <li>
-            <i class="fa-li fa fa-check"></i>
-            Mobile-First, Responsive Design</li>
-          <li>
-            <i class="fa-li fa fa-check"></i>
-            Cross Browser Testing &amp; Debugging</li>
-          <li>
-            <i class="fa-li fa fa-check"></i>
-            Cross Functional Teams</li>
-          <li>
-            <i class="fa-li fa fa-check"></i>
-            Agile Development &amp; Scrum</li>
+         <br>
+        <div class="mb-3 subheading">Tools</div>
+        <ul class="fa-ul mb-0 myList">
+           {% for skills in skillsList %}
+            {% if skills.type == 'TL' %}
+                <div class ="outt">
+                  <li class = "inn">
+                    {{skills.title}}
+                  </li>
+              <!--
+              
+              <button type="button" class="innBtn" data-toggle="modal" data-target="#{{skills.title}}">
+                 <i class="fas fa-comment-dots forColor"></i>
+              </button>
+             
+              <div class="modal fade right" id="{{skills.title}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                
+                <div class="modal-dialog  modal-side modal-top-right" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="exampleModalLabel">{{skills.title}}</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>{{skills.grade}}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <p>{{skills.contents | linebreaksbr}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              -->
+              <li>
+                {% if user.is_authenticated %}
+                  <span>
+                    <form style="display: inline">
+                      <input class="MyButton" type="button" value="수정" 
+                      onclick="window.location.href='/profile/skills/edit/{{skills.pk}}'" /></form>
+                    <form style="display: inline">
+                      <input class="MyButton" type="button" value="삭제" 
+                      onclick="window.location.href='/profile/skills/delete/{{skills.pk}}'" /></form>
+                  </span>
+                {% endif %}
+              </li>
+              </div>
+            {% endif %}
+          {%endfor%}
         </ul>
-      </div>
 
 
 
@@ -478,7 +515,7 @@
       <div class="w-100">
         <h2 class="mb-5">Interests</h2>
         <p>{{myprofile.interesrts}}</p>
-        <p class="mb-0">When forced indoors, I follow a number of sci-fi and fantasy genre movies and television shows, I am an aspiring chef, and I spend a large amount of my free time exploring the latest technology advancements in the front-end web development world.</p>
+        <p class="mb-0">웹, 앱, 데스크탑 응용 등 개발 전반<br>네트워크, 컴퓨터 비젼<br>모든 분야를 섭렵하여 최고의 소프트웨어 아키텍처를 꿈꾸고 있습니다.</p>
       </div>
     </section>
 
