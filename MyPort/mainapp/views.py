@@ -31,7 +31,8 @@ def contact(request):
     return render(request, 'mainapp/underconstruction.html')
 
 
-
+def underconstruction(request):
+     return render(request, 'mainapp/underconstruction.html')
 
 
 
@@ -108,6 +109,25 @@ def profile_skills_write(request):
         form = SkillsForm()
     
     return render(request, 'foradmin/profile_experience_write.html', {'form':form})
+
+
+@login_required
+def profile_skills_update(request, pk):
+    skills = Skills.objects.get(pk = pk)
+    form = SkillsForm(request.POST or None, instance = skills)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/profile')
+    return render(request, 'foradmin/profile_experience_write.html', {'form':form})
+
+@login_required
+def profile_skills_delete(request, pk):
+    skills = Skills.objects.get(pk = pk)
+    skills.delete()
+    return HttpResponseRedirect('/profile')
+
+
+
 
 
 @login_required

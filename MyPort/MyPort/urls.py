@@ -28,12 +28,14 @@ urlpatterns = [
     path('profile/experience/edit/<int:pk>', profile_experience_update, name='peu'),
     path('profile/experience/delete/<int:pk>', profile_experience_delete, name='ped'),
     path('profile/skills/write', profile_skills_write, name='pes'),
+    path('profile/skills/edit/<int:pk>', profile_skills_update, name='psu'),
+    path('profile/skills/delete/<int:pk>', profile_skills_delete, name='psd'),
     path('profile/myprofile/edit', profile_myprofile_edit, name='pme'),
     path('index/about/write', index_about_write, name='iaw'),
     path('profile/timeline/edit/<int:pk>', index_about_update, name='iau'),
     path('profile/timeline/delete/<int:pk>', index_about_delete, name='iad'),
-    path('projects/', projects, name = 'project'),
-    path('contact/', contact, name = 'contact'),
+    path('projects/', underconstruction, name = 'project'),
+    path('contact/', underconstruction, name = 'contact'),
 
 ]
 

@@ -45,10 +45,10 @@
             <a class="nav-link" href="/profile">Profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="post.html">Projects</a>
+            <a class="nav-link" href="/projects">Projects</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link" href="/contact">Contact</a>
           </li>
         </ul>
       </div>
@@ -59,7 +59,7 @@
   <!----> 
   
   <!--  side Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav" style="background-image: url('../../static/profile/img/home-bg.jpg')">
     <a class="navbar-brand js-scroll-trigger" href="#page-top">
       <span class="d-block d-lg-none">Clarence Taylor</span>
       <span class="d-none d-lg-block">
@@ -86,11 +86,6 @@
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#interests">Interests</a>
         </li>
-        <!--
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#awards">Awards</a>
-        </li>
-        -->
       </ul>
     </div>
   </nav>
@@ -111,7 +106,7 @@
         <div class="subheading mb-5">{{myprofile.position}}
           <a href="mailto:demonic3540@naver.com">{{myprofile.email}}</a>
         </div>
-        <p class="lead mb-5">만들고 싶은 것을 만드는 개발자입니다.</p>
+        <p class="lead mb-5">{{myprofile.intro | linebreaksbr}}</p>
         
         <div class="social-icons">
 
@@ -212,15 +207,59 @@
                 </form>
           {% endif %}
 
+
+
         <h2 class="mb-5">Skills</h2>
 
         <div class="subheading mb-3">Programming Languages</div>
         <ul class="fa-ul mb-0 myList">
            {% for skills in skillsList %}
-            {% if skills.type == 'PL'%}
+              {% if skills.type == 'PL'%}
+                <div class ="outt">
+                  <li class = "inn">
+                    {{skills.title}}
+                  </li>
+              
+              <!-- Modal -->
+              <!-- Button trigger modal -->
+              <button type="button" class="innBtn" data-toggle="modal" data-target="#{{skills.title}}">
+                 <i class="fas fa-comment-dots forColor"></i>
+              </button>
+             
+              <div class="modal fade right" id="{{skills.title}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                
+                <div class="modal-dialog  modal-side modal-top-right" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="exampleModalLabel">{{skills.title}}</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>{{skills.grade}}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <p>{{skills.contents | linebreaksbr}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end Modal -->
               <li>
-                {{skills.title}}
+                {% if user.is_authenticated %}
+                  <span>
+                    <form style="display: inline">
+                      <input class="MyButton" type="button" value="수정" 
+                      onclick="window.location.href='/profile/skills/edit/{{skills.pk}}'" /></form>
+                    <form style="display: inline">
+                      <input class="MyButton" type="button" value="삭제" 
+                      onclick="window.location.href='/profile/skills/delete/{{skills.pk}}'" /></form>
+                  </span>
+                {% endif %}
               </li>
+              </div>      
             {% endif %}
           {%endfor%}
         </ul>
@@ -231,9 +270,54 @@
         <ul class="fa-ul mb-0 myList">
            {% for skills in skillsList %}
             {% if skills.type == 'FW' %}
+                <div class ="outt">
+                  <li class = "inn">
+                    {{skills.title}}
+                  </li>
+              
+              <!-- Modal -->
+              <!-- Button trigger modal -->
+              <button type="button" class="innBtn" data-toggle="modal" data-target="#{{skills.title}}">
+                 <i class="fas fa-comment-dots forColor"></i>
+              </button>
+             
+              <div class="modal fade right" id="{{skills.title}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                
+                <div class="modal-dialog  modal-side modal-top-right" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="exampleModalLabel">{{skills.title}}</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>{{skills.grade}}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <p>{{skills.contents | linebreaksbr}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end Modal -->
               <li>
-                {{skills.title}}
+                {% if user.is_authenticated %}
+                  <span>
+                    <form style="display: inline">
+                      <input class="MyButton" type="button" value="수정" 
+                      onclick="window.location.href='/profile/skills/edit/{{skills.pk}}'" /></form>
+                    <form style="display: inline">
+                      <input class="MyButton" type="button" value="삭제" 
+                      onclick="window.location.href='/profile/skills/delete/{{skills.pk}}'" /></form>
+                  </span>
+                {% endif %}
               </li>
+              </div>
+
+              
+
             {% endif %}
           {%endfor%}
         </ul>
@@ -243,9 +327,51 @@
         <ul class="fa-ul mb-0 myList">
            {% for skills in skillsList %}
             {% if skills.type == 'DB' %}
+                <div class ="outt">
+                  <li class = "inn">
+                    {{skills.title}}
+                  </li>
+              
+              <!-- Modal -->
+              <!-- Button trigger modal -->
+              <button type="button" class="innBtn" data-toggle="modal" data-target="#{{skills.title}}">
+                 <i class="fas fa-comment-dots forColor"></i>
+              </button>
+             
+              <div class="modal fade right" id="{{skills.title}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                
+                <div class="modal-dialog  modal-side modal-top-right" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="exampleModalLabel">{{skills.title}}</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>{{skills.grade}}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <p>{{skills.contents | linebreaksbr}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end Modal -->
               <li>
-                {{skills.title}}
+                {% if user.is_authenticated %}
+                  <span>
+                    <form style="display: inline">
+                      <input class="MyButton" type="button" value="수정" 
+                      onclick="window.location.href='/profile/skills/edit/{{skills.pk}}'" /></form>
+                    <form style="display: inline">
+                      <input class="MyButton" type="button" value="삭제" 
+                      onclick="window.location.href='/profile/skills/delete/{{skills.pk}}'" /></form>
+                  </span>
+                {% endif %}
               </li>
+              </div>
             {% endif %}
           {%endfor%}
         </ul>
@@ -255,9 +381,51 @@
         <ul class="fa-ul mb-0 myList">
            {% for skills in skillsList %}
             {% if skills.type == 'LB' %}
+                <div class ="outt">
+                  <li class = "inn">
+                    {{skills.title}}
+                  </li>
+              
+              <!-- Modal -->
+              <!-- Button trigger modal -->
+              <button type="button" class="innBtn" data-toggle="modal" data-target="#{{skills.title}}">
+                 <i class="fas fa-comment-dots forColor"></i>
+              </button>
+             
+              <div class="modal fade right" id="{{skills.title}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                
+                <div class="modal-dialog  modal-side modal-top-right" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="exampleModalLabel">{{skills.title}}</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>{{skills.grade}}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <p>{{skills.contents | linebreaksbr}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end Modal -->
               <li>
-                {{skills.title}}
+                {% if user.is_authenticated %}
+                  <span>
+                    <form style="display: inline">
+                      <input class="MyButton" type="button" value="수정" 
+                      onclick="window.location.href='/profile/skills/edit/{{skills.pk}}'" /></form>
+                    <form style="display: inline">
+                      <input class="MyButton" type="button" value="삭제" 
+                      onclick="window.location.href='/profile/skills/delete/{{skills.pk}}'" /></form>
+                  </span>
+                {% endif %}
               </li>
+              </div>
             {% endif %}
           {%endfor%}
         </ul>
@@ -315,41 +483,6 @@
     </section>
 
     <hr class="m-0">
-    <!--
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="awards">
-      <div class="w-100">
-        <h2 class="mb-5">Awards &amp; Certifications</h2>
-        <ul class="fa-ul mb-0">
-          <li>
-            <i class="fa-li fa fa-trophy text-warning"></i>
-            Google Analytics Certified Developer</li>
-          <li>
-            <i class="fa-li fa fa-trophy text-warning"></i>
-            Mobile Web Specialist - Google Certification</li>
-          <li>
-            <i class="fa-li fa fa-trophy text-warning"></i>
-            1<sup>st</sup>
-            Place - University of Colorado Boulder - Emerging Tech Competition 2009</li>
-          <li>
-            <i class="fa-li fa fa-trophy text-warning"></i>
-            1<sup>st</sup>
-            Place - University of Colorado Boulder - Adobe Creative Jam 2008 (UI Design Category)</li>
-          <li>
-            <i class="fa-li fa fa-trophy text-warning"></i>
-            2<sup>nd</sup>
-            Place - University of Colorado Boulder - Emerging Tech Competition 2008</li>
-          <li>
-            <i class="fa-li fa fa-trophy text-warning"></i>
-            1<sup>st</sup>
-            Place - James Buchanan High School - Hackathon 2006</li>
-          <li>
-            <i class="fa-li fa fa-trophy text-warning"></i>
-            3<sup>rd</sup>
-            Place - James Buchanan High School - Hackathon 2005</li>
-        </ul>
-      </div>
-    </section>
-    -->
   </div>
 
   <!-- Bootstrap core JavaScript -->
