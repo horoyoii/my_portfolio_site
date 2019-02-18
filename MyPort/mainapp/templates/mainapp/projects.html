@@ -1,0 +1,273 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Horoyoii's Projects</title>
+
+  <!-- Bootstrap core CSS --> 
+  <link href='{% static "projects/vendor/bootstrap/css/bootstrap.min.css" %}' rel="stylesheet">
+  
+  <!-- Custom fonts for this template -->
+  <link href='{% static "projects/vendor/fontawesome-free/css/all.min.css" %}' rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <!-- Custom styles for this template -->
+  <link href='{% static "projects/css/projects.css" %}' rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">  Horoyoii's Projects</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="mainContainer"> 
+    <div id="mySidenav" class="sidenav">
+      <h3 id = "allnav"><a href="/projects">ALL</a></h3>
+      
+      <!--<a href="#">Services</a>-->
+      <h3>Language</h3>
+        <div class="classification">
+          <a href="/projects/language/CL">C</a>
+          <a href="/projects/language/CP">C++</a>
+          <a href="/projects/language/PY">Python</a>
+          <a href="/projects/language/JV">Java</a>          
+        </div>
+      <h3>Platform</h3>
+        <div class="classification">
+          <a href="/projects/platform/DS">Desktop App</a>
+          <a href="/projects/platform/AP">Mobile App</a>
+          <a href="/projects/platform/WB">Web</a>
+          <a href="/projects/platform/IM">Imbedded</a>    
+          <a href="/projects/platform/ET">ETC</a>          
+        </div>      
+    </div>
+
+    <div id="LeftContainer">
+      <div id = "headder">
+        <header style="background-image: url('img/post-bg.jpg')">
+            <h4>Show What you Have</h4>
+        </header>
+        
+        {% if user.is_authenticated %}
+          <form style="display: inline">
+            <input class="MyButton" type="button" value="추가" 
+              onclick="window.location.href='/projects/write'" />
+          </form>
+        {% endif %}
+
+      </div>
+
+      <div>
+
+
+<!-- Portfolio Grid -->
+  <section id="portfolio">
+    <div class="container">
+      
+      <div class="row">
+
+        {% for project in projectsList %}
+        <!--// Item -->
+        <div class="col-md-4 col-sm-6 portfolio-item" style="min-width:300px">
+          <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+            <!--Flag-->
+            <div class="date">
+              <span class="day">{{project.date |date:"d"}}</span>
+              <span class="month">{{project.date |date:"M"}}</span>
+              <span class="year">{{project.date |date:"Y"}}</span>
+           </div>
+           <!--Flag-->
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="{{project.imageURLGit}}" alt="">
+          </a>
+          <div class="portfolio-caption">
+            <h4>{{project.subtitle}}</h4>
+            <p class="text-muted">{{project.subContents}}</p>
+          </div>
+
+            {% if user.is_authenticated %}
+             <span class = "btnSet">
+              <form style="display: inline">
+                <input class="MyButton" type="button" value="수정" 
+                onclick="window.location.href='/projects/edit/{{project.pk}}'" /></form>
+              <form style="display: inline">
+                <input class="MyButton" type="button" value="삭제" 
+                onclick="window.location.href='/projects/delete/{{project.pk}}'" /></form>
+             </span>
+            {% endif %}
+
+
+        </div>
+        <!-- Item // -->
+        {%endfor%}        
+
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+
+  </div>
+  
+  <!-- Portfolio Modals -->
+
+  <!-- Modal 1 -->
+  <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="close-modal" data-dismiss="modal">
+          <div class="lr">
+            <div class="rl"></div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <div class="modal-body">
+                <article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-0-directory-structure--brief-development-environment" class="anchor" aria-hidden="true" href="#0-directory-structure--brief-development-environment"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>0. Directory Structure &amp; Brief Development Environment</h1>
+<h3><a id="user-content-kioskk" class="anchor" aria-hidden="true" href="#kioskk"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>KIOSKK</h3>
+<p>Server Appication on Windows<br>
+Windows 10 - 64bits, Qt 5.2.0. (MSVC 2010, 32 bit), Qtcreator 3.0.0. Developped application based on QMainWindow,<br>
+Touch Screen Monitor.<br>
+C++</p>
+<h3><a id="user-content-order_appandroid_java_client" class="anchor" aria-hidden="true" href="#order_appandroid_java_client"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Order_APP(Android_java_client)</h3>
+<p>Clinet App on Android<br>
+Android Studio<br>
+JAVA</p>
+<h3><a id="user-content-database" class="anchor" aria-hidden="true" href="#database"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>DATABASE</h3>
+<p>MariaDB and HeidiSQL</p>
+<h1><a id="user-content-1-report" class="anchor" aria-hidden="true" href="#1-report"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. REPORT</h1>
+<p><a href="https://blog.naver.com/demonic3540/221456597192" rel="nofollow">https://blog.naver.com/demonic3540/221456597192</a></p>
+<h1><a id="user-content-2-source-code" class="anchor" aria-hidden="true" href="#2-source-code"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. SOURCE CODE</h1>
+<p>HERE</p>
+<h1><a id="user-content-3-diagram" class="anchor" aria-hidden="true" href="#3-diagram"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. DIAGRAM</h1>
+<p><a href="https://blog.naver.com/demonic3540/221456607683" rel="nofollow">https://blog.naver.com/demonic3540/221456607683</a>
+<a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/34915108/52113994-329d8780-264e-11e9-9514-41c62c662d04.png"><img src="https://user-images.githubusercontent.com/34915108/52113994-329d8780-264e-11e9-9514-41c62c662d04.png" alt="kiosk" style="max-width:100%;"></a></p>
+<h1><a id="user-content-4-demonstration-screenshot" class="anchor" aria-hidden="true" href="#4-demonstration-screenshot"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. Demonstration ScreenShot</h1>
+<p><a href="https://blog.naver.com/demonic3540/221456627727" rel="nofollow">https://blog.naver.com/demonic3540/221456627727</a></p>
+<h1><a id="user-content-5-demonstration-video" class="anchor" aria-hidden="true" href="#5-demonstration-video"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5. Demonstration Video</h1>
+<p><a href="https://www.youtube.com/watch?v=osiWXPJoKo0&amp;feature=youtu.be" rel="nofollow">https://www.youtube.com/watch?v=osiWXPJoKo0&amp;feature=youtu.be</a></p>
+</article>
+                
+                
+                
+                
+                <ul class="list-inline">
+                  <li>Date: January 2017</li>
+                  <li>Client: Threads</li>
+                  <li>Category: Illustration</li>
+                </ul>
+
+                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                  <i class="fas fa-times"></i>
+                  Close Project</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+          <p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src='{% static "projects/vendor/jquery/jquery.min.js" %}'></script>
+  <script src='{% static "projects/vendor/bootstrap/js/bootstrap.bundle.min.js" %}'></script>
+
+  <!-- Plugin JavaScript -->
+  <script src='{% static "projects/vendor/jquery-easing/jquery.easing.min.js" %}'></script>
+
+
+  <!-- Custom scripts for this template -->
+  <script src='{% static "projects/js/projects.min.js" %}'></script>
+  
+  <!-- Contact form JavaScript -->
+  <script src="js/jqBootstrapValidation.js"></script>
+  <script src="js/contact_me.js"></script>
+
+
+  <!--For timeline -->
+  <!-- Custom scripts for this template -->
+  <script src='{% static "projects/js/agency.min.js" %}'></script>
+
+</body>
+
+</html>

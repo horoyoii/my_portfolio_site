@@ -31,6 +31,8 @@ class MyProfile(models.Model):
     intro = models.TextField()
     interests = models.TextField()
     
+
+
 class TimeLine(models.Model):
     date = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
@@ -73,3 +75,55 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
     if not old_file == new_file:
         if os.path.isfile(old_file.path):
             os.remove(old_file.path)
+
+
+
+#====================================================================================================
+# Projects 
+#====================================================================================================
+class Projects(models.Model):
+    CLANGUAGE ='CL'
+    CPLUSPLUS ='CP'
+    JAVA ='JV'
+    PYTHON ='PY'
+    ELSE = 'ES'
+    LANGUAGE_CHOICE =(
+        (CLANGUAGE,'C language'),
+        (CPLUSPLUS,'Cpp'),
+        (JAVA,'Java'),
+        (PYTHON,'Python'),
+        (ELSE, 'Else'),
+    )   
+
+    WEB = 'WB'
+    APP = 'AP'
+    DESKTOP ='DS'
+    IMBE = 'IM'
+    ETC ='ET'
+    CLASS_CHOICE=(
+        (WEB,'Web'),
+        (APP,'Mobile App'),
+        (DESKTOP, 'DeskTop App'),
+        (IMBE,'Imbedded'),
+        (ETC, 'ETC')
+    )
+
+    date = models.DateField(help_text="ex) 2017-02-28")
+    subtitle = models.CharField(max_length=200)
+    subContents = models.TextField()
+    #TODO: to thumbnail generator
+    imageURLGit = models.TextField()
+    language = models.CharField(
+        max_length=2, 
+        choices=LANGUAGE_CHOICE,
+        default=CLANGUAGE,
+        )
+    platform = models.CharField(
+        max_length=2, 
+        choices=CLASS_CHOICE,
+        default=ETC,
+        )
+
+
+    def __str__(self):
+        return self.name

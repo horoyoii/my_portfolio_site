@@ -34,10 +34,15 @@ urlpatterns = [
     path('index/about/write', index_about_write, name='iaw'),
     path('profile/timeline/edit/<int:pk>', index_about_update, name='iau'),
     path('profile/timeline/delete/<int:pk>', index_about_delete, name='iad'),
-    path('projects/', underconstruction, name = 'project'),
+    path('projects/', projects, name = 'project'),
+    path('projects/write', projects_write, name='pw'),
+    path('projects/edit/<int:pk>', projects_update, name='pu'),
+    path('projects/delete/<int:pk>', projects_delete, name='pd'),
+    path('projects/<str:cate>/<str:flag>', projects_categorized, name='pc'),
     path('contact/', underconstruction, name = 'contact'),
 
 ]
+
 
 # this is needed to serve the sources 
 # and with this, don't need to indicate all the path of the stored data

@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Resume - Start Bootstrap Theme</title>
+  <title>Horoyoii's </title>
 
   <!-- Bootstrap core CSS -->
   <link href='{% static "profile/vendor/bootstrap/css/bootstrap.min.css" %}' rel="stylesheet">
@@ -96,10 +96,10 @@
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
       <div class="w-100">
         {% if user.is_authenticated %}
-              <form style="display: inline">
-                <input class="MyButton" type="button" value="프로필 수정" 
-                onclick="window.location.href='/profile/myprofile/edit'" /></form>
-            {% endif %}
+          <form style="display: inline">
+            <input class="MyButton" type="button" value="프로필 수정" 
+              onclick="window.location.href='/profile/myprofile/edit'" /></form>
+        {% endif %}
         <h1 class="mb-0">{{myprofile.name}}
           <span class="text-primary"></span>
         </h1>

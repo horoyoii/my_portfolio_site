@@ -23,8 +23,31 @@ def profile(request):
         })
 
 def projects(request):
+    projectsList = Projects.objects.all()
+    return render(request, 'mainapp/projects.html', {'projectsList':projectsList})
 
-    return render(request, 'mainapp/underconstruction.html')
+def projects_categorized(request, cate, flag):
+    if cate == "language":
+        projectsList = Projects.objects.filter(language=flag)
+    elif cate == "platform":
+        projectsList = Projects.objects.filter(platform=flag)
+    return render(request, 'mainapp/projects.html', {'projectsList':projectsList})
+
+
+@login_required
+def projects_write(request):
+    if request.method == 'POST':
+        form = ProjectsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/projects')
+    else:
+        form = ProjectsForm()
+    return render(request, 'foradmin/projects_write.html', {'form': form})    
+
+
+
+
 
 def contact(request):
     
@@ -143,3 +166,22 @@ def profile_myprofile_edit(request):
     return render(request, 'foradmin/profile_experience_write.html', {'form':form})
 
  
+
+#==================================================
+
+@login_required
+def projects_update(request, pk):
+    project = Projects.objects.get(pk = pk)
+    form = ProjectsForm(request.POST or None, instance = project)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/projects')
+    return render(request, 'foradmin/projects_write.html', {'form':form})
+
+
+
+@login_required
+def projects_delete(request, pk):
+    project = Projects.objects.get(pk = pk)
+    project.delete()
+    return HttpResponseRedirect('/projects')

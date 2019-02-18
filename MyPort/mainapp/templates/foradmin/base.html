@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load staticfiles %}
+    <script src="{% static 'writeform/jquery/dist/jquery.js' %}"></script>
+    <script src="{% static 'writeform/jquery/dist/jquery.cookie.js'    %}"></script>
+    <script src="{% static 'writeform/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'writeform/bootstrap/dist/css/bootstrap.min.css' %}">
+  </head>
+
+  <body>
+  	{% if messages %}
+	<ul class="messages">
+	    {% for message in messages %}
+	    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	    {% endfor %}
+	</ul>
+	{% endif %}
+
+	{% block content %}
+    {% endblock %}
+
+
+  </body>
+</html>

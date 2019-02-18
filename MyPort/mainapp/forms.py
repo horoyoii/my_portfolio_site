@@ -20,3 +20,9 @@ class TimeLineForm(ModelForm):
     class Meta:
         model = TimeLine
         fields=['date', 'title', 'subtitle', 'contents', 'image', 'cover']
+
+class ProjectsForm(ModelForm):
+    class Meta:
+        model = Projects
+        fields=['date', 'subtitle','subContents','imageURLGit','language', 'platform']
+        # label, widget을 추가하여 form을 꾸밀 수 있다.
