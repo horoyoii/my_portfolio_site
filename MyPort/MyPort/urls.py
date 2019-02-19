@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path, include
 from mainapp.views import *
 
 from django.conf import settings
@@ -40,6 +40,7 @@ urlpatterns = [
     path('projects/delete/<int:pk>', projects_delete, name='pd'),
     path('projects/<str:cate>/<str:flag>', projects_categorized, name='pc'),
     path('contact/', underconstruction, name = 'contact'),
+    re_path(r'^markdownx/', include('markdownx.urls')),
 
 ]
 

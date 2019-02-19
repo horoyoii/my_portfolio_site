@@ -31,8 +31,22 @@ def projects_categorized(request, cate, flag):
         projectsList = Projects.objects.filter(language=flag)
     elif cate == "platform":
         projectsList = Projects.objects.filter(platform=flag)
-    return render(request, 'mainapp/projects.html', {'projectsList':projectsList})
+    return render(request, 'mainapp/projects.html', {'projectsList':projectsList, 'maxim':getMaxim(flag)})
 
+MaximList = {"CL" : "“A C program is like a fast dance \n on a newly waxed dance floor by people carrying razors.” \n- Alan Jay Perlis",
+    "CP" : "Who would dare to say that he has masterd C++?",
+    "PY" : "Simple is better than Complex",
+    "JV" : "“Fine, Java MIGHT be a good example of what a programming language should be like. \nBut Java applications are good examples of what applications SHOULDN’T be like.” \n- pixadel",
+    "DS" : "“Learning to program has no more to do with designing interactive software \nthan learning to touch type has to do with writing poetry” \n- Alan Kay",
+    "WB" : "",
+    "AP" :"",
+    "IM" : "",
+    "ET" : "“Most good programmers do programming \nnot because they expect to get paid or get adulation by the public, \nbut because it is fun to program.” \n- Charles Babbage"
+    }
+
+def getMaxim(flag):
+    global MaximList
+    return MaximList[flag]
 
 @login_required
 def projects_write(request):

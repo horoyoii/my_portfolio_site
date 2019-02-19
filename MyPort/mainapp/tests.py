@@ -1,3 +1,8 @@
-from django.test import TestCase
+from django import template
+from markdownx.utils import markdownify
 
-# Create your tests here.
+register = template.Library()
+
+@register.filter
+def show_markdown(text):
+    return markdownify(text)

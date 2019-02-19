@@ -4,6 +4,9 @@ from django.db import models
 import os
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
+import requests
+from markdownx.models import MarkdownxField
+from markdownx.utils import markdownify
 #======
 
 
@@ -81,6 +84,8 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
 #====================================================================================================
 # Projects 
 #====================================================================================================
+
+
 class Projects(models.Model):
     CLANGUAGE ='CL'
     CPLUSPLUS ='CP'
@@ -109,10 +114,11 @@ class Projects(models.Model):
     )
 
     date = models.DateField(help_text="ex) 2017-02-28")
-    subtitle = models.CharField(max_length=200)
-    subContents = models.TextField()
+    subtitle = models.CharField(max_length=200, help_text="썸네일과 함께 보여질 제목")
+    subContents = models.TextField(help_text="썸네일과 함께 보여질 간략한 내용")
     #TODO: to thumbnail generator
-    imageURLGit = models.TextField()
+    imageURLGit = models.TextField(help_text="* 썸네일 사진 : 사진 직접 올리지말고 url을 올림")
+    con = MarkdownxField(help_text="* 보여질 내용물 : markdown으로 작성")
     language = models.CharField(
         max_length=2, 
         choices=LANGUAGE_CHOICE,
@@ -124,6 +130,9 @@ class Projects(models.Model):
         default=ETC,
         )
 
+    @property
+    def formatted_markdown(self):
+        return markdownify(self.con)
 
     def __str__(self):
         return self.name
