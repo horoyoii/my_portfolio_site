@@ -1,25 +1,17 @@
+{% load staticfiles %}
 <!doctype html>
 <html lang="en">
-  <head>
-    {% load staticfiles %}
-    <script src="{% static 'writeform/jquery/dist/jquery.js' %}"></script>
-    <script src="{% static 'writeform/jquery/dist/jquery.cookie.js'    %}"></script>
-    <script src="{% static 'writeform/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'writeform/bootstrap/dist/css/bootstrap.min.css' %}">
-  </head>
-
-  <body>
-  	{% if messages %}
-	<ul class="messages">
-	    {% for message in messages %}
-	    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-	    {% endfor %}
-	</ul>
-	{% endif %}
-
-	{% block content %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href='{% static "projects/css/mycss.css" %}' rel="stylesheet">
+ }
+</head>
+<body>
+  <div class="container">
+    {% block content %}
     {% endblock %}
-
-
-  </body>
+  </div>
+</body>
 </html>

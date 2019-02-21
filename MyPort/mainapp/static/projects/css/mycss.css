@@ -1,0 +1,12 @@
+textarea.form-control{
+    height: 100px;
+  }
+
+#id_con{
+    height: 500px;
+}
+
+.hele{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

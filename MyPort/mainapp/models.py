@@ -117,7 +117,7 @@ class Projects(models.Model):
     subtitle = models.CharField(max_length=200, help_text="썸네일과 함께 보여질 제목")
     subContents = models.TextField(help_text="썸네일과 함께 보여질 간략한 내용")
     #TODO: to thumbnail generator
-    imageURLGit = models.TextField(help_text="* 썸네일 사진 : 사진 직접 올리지말고 url을 올림")
+    imageURLGit = models.TextField(default ="https://user-images.githubusercontent.com/34915108/53049248-069d5580-34da-11e9-81be-d683105b0f7d.gif", help_text="* 썸네일 사진 : 사진 직접 올리지말고 url을 올림")
     con = MarkdownxField(help_text="* 보여질 내용물 : markdown으로 작성")
     language = models.CharField(
         max_length=2, 

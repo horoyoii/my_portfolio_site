@@ -39,8 +39,8 @@ urlpatterns = [
     path('projects/edit/<int:pk>', projects_update, name='pu'),
     path('projects/delete/<int:pk>', projects_delete, name='pd'),
     path('projects/<str:cate>/<str:flag>', projects_categorized, name='pc'),
-    path('contact/', underconstruction, name = 'contact'),
     re_path(r'^markdownx/', include('markdownx.urls')),
+    path('contact/', underconstruction, name = 'contact'),
 
 ]
 
