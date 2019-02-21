@@ -20,7 +20,12 @@ class MyProfileForm(ModelForm):
 class TimeLineForm(ModelForm):
     class Meta:
         model = TimeLine
-        fields=['date', 'title', 'subtitle', 'contents', 'image', 'cover']
+        fields=['date', 'title', 'subtitle', 'contents', 'image']
+
+class engTimeLineForm(ModelForm):
+    class Meta:
+        model = engTimeLine
+        fields=['date', 'title', 'subtitle', 'contents', 'image']
 
 class ProjectsForm(ModelForm):
     class Meta:

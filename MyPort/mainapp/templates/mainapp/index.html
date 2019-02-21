@@ -21,7 +21,7 @@
 
   <!-- Custom styles for this template -->
   <link href='{% static "mainapp/css/clean-blog.css" %}' rel="stylesheet">
-
+  <link href='{% static "mycss.css" %}' rel="stylesheet">
 </head>
 
 <body>
@@ -45,10 +45,21 @@
             <a class="nav-link" href="/projects">Projects</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/contact">Contact</a>
+            <a class="nav-link" href="/admin">login</a>
           </li>
+          <li class="nav-item">
+            <div class = "ChoiceLan">
+              <form style="display:inline;margin-right:0px;">
+                <input type="button" value="Kor" onclick="window.location.href='/kor'" class="lanbtn btnn" />
+              </form>
+              <form style="display:inline">
+                <input type="button" value="Eng" onclick="window.location.href='/eng'" class="lanbtn btnn" />
+              </form>
+            </div>
+          </li>          
         </ul>
       </div>
+
     </div>
   </nav>
 
@@ -77,6 +88,11 @@
                 <input class="MyButton" type="button" value="추가" 
                 onclick="window.location.href='/index/about/write'" />
                 </form>
+            <form style="display: inline">
+                <input class="MyButton" type="button" value="eng추가" 
+                onclick="window.location.href='/index/about/engwrite'" />
+                </form>
+
         {% endif %}
 
     <div class="container">

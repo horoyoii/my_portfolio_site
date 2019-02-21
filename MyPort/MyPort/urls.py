@@ -32,6 +32,7 @@ urlpatterns = [
     path('profile/skills/delete/<int:pk>', profile_skills_delete, name='psd'),
     path('profile/myprofile/edit', profile_myprofile_edit, name='pme'),
     path('index/about/write', index_about_write, name='iaw'),
+    path('index/about/engwrite', index_about_engwrite, name='iaw'),
     path('profile/timeline/edit/<int:pk>', index_about_update, name='iau'),
     path('profile/timeline/delete/<int:pk>', index_about_delete, name='iad'),
     path('projects/', projects, name = 'project'),
@@ -41,6 +42,12 @@ urlpatterns = [
     path('projects/<str:cate>/<str:flag>', projects_categorized, name='pc'),
     re_path(r'^markdownx/', include('markdownx.urls')),
     path('contact/', underconstruction, name = 'contact'),
+
+    path('kor', index_kor, name='ik'),
+    path('eng', index_eng, name='ie'),
+    path('profile/kor', profile_kor, name='ik'),
+    path('profile/eng', profile_eng, name='ie'),    
+    path('profile/add', conn, name='ee'),
 
 ]
 

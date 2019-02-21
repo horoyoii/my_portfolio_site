@@ -21,7 +21,7 @@
   
   <!-- Custom styles for this template -->
   <link href='{% static "profile/css/resume.css" %}' rel="stylesheet">
-
+  <link href='{% static "mycss.css" %}' rel="stylesheet">
   <!-- W3c-->
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   
@@ -48,8 +48,19 @@
             <a class="nav-link" href="/projects">Projects</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/contact">Contact</a>
+            <a class="nav-link" href="/admin">Login</a>
           </li>
+          <li class="nav-item">
+            <div class = "ChoiceLan">
+              <form style="display:inline;margin-right:0px;">
+                <input type="button" value="Kor" onclick="window.location.href='/profile/kor'" class="lanbtn btnn" />
+              </form>
+              <form style="display:inline">
+                <input type="button" value="Eng" onclick="window.location.href='/profile/eng'" class="lanbtn btnn" />
+              </form>
+            </div>
+          </li>    
+
         </ul>
       </div>
     </div>
@@ -63,7 +74,7 @@
     <a class="navbar-brand js-scroll-trigger" href="#page-top">
       <span class="d-block d-lg-none">Horoyoii</span>
       <span class="d-none d-lg-block">
-        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="../../static/profile/img/profile.jpg" alt="">
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="../../static/profile/img/profile.JPG" alt="">
       </span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -171,7 +182,7 @@
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
-            <h3 class="mb-0">성균관 대학교</h3>
+            <h3 class="mb-0">{{univ}}</h3>
             <div class="subheading mb-3">I'm in double major of Computer Science and Philosoppy</div>
             <div>Computer Science - GPA : 4.5</div>
             <div>Philosophy - GPA : 3.5</div>
@@ -184,8 +195,8 @@
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between">
           <div class="resume-content">
-            <h3 class="mb-0">대연 고등학교</h3>
-            <div class="subheading mb-3">부산</div>
+            <h3 class="mb-0">{{highSchool}}</h3>
+            <div class="subheading mb-3">{{location}}</div>
             <!--<p>GPA: 3.56</p>-->
           </div>
           <div class="resume-date text-md-right">
@@ -514,8 +525,8 @@
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="interests">
       <div class="w-100">
         <h2 class="mb-5">Interests</h2>
-        <p>{{myprofile.interesrts}}</p>
-        <p class="mb-0">웹, 앱, 데스크탑 응용 등 개발 전반<br>네트워크, 컴퓨터 비젼<br>모든 분야를 섭렵하여 최고의 소프트웨어 아키텍처를 꿈꾸고 있습니다.</p>
+        <p>{{myprofile.interesrts | linebreaksbr}}</p>
+        <p class="mb-0">{{myprofile.interesrts}}</p>
       </div>
     </section>
 
