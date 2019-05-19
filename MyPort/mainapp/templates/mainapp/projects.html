@@ -113,41 +113,40 @@
 
         {% for project in projectsList %}
         <!--// Item -->
-        <div class="col-md-4 col-sm-6 portfolio-item" style="min-width:300px">
-          <a class="portfolio-link" data-toggle="modal" href="#mod{{project.pk}}">
-            <!--Flag-->
-            <div class="date">
-              <span class="day">{{project.date |date:"d"}}</span>
-              <span class="month">{{project.date |date:"M"}}</span>
-              <span class="year">{{project.date |date:"Y"}}</span>
-           </div>
-           <!--Flag-->
-            <div class="portfolio-hover">
-              <div class="portfolio-hover-content">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
+          {% if user.is_authenticated or project.show_public%}
+          <div class="col-md-4 col-sm-6 portfolio-item" style="min-width:300px">
+            <a class="portfolio-link" data-toggle="modal" href="#mod{{project.pk}}">
+              <!--Flag-->
+              <div class="date">
+                <span class="day">{{project.date |date:"d"}}</span>
+                <span class="month">{{project.date |date:"M"}}</span>
+                <span class="year">{{project.date |date:"Y"}}</span>
             </div>
-            <img class="img-fluid" src="{{project.imageURLGit}}" alt="">
-          </a>
-          <div class="portfolio-caption">
-            <h4>{{project.subtitle}}</h4>
-            <p class="text-muted">{{project.subContents | linebreaksbr}}</p>
-          </div>
+            <!--Flag-->
+              <div class="portfolio-hover">
+                <div class="portfolio-hover-content">
+                  <i class="fas fa-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid" src="{{project.imageURLGit}}" alt="">
+            </a>
+            <div class="portfolio-caption">
+              <h4>{{project.subtitle}}</h4>
+              <p class="text-muted">{{project.subContents | linebreaksbr}}</p>
+            </div>
 
-            {% if user.is_authenticated %}
-             <span class = "btnSet">
-              <form style="display: inline">
-                <input class="MyButton" type="button" value="수정" 
-                onclick="window.location.href='/projects/edit/{{project.pk}}'" /></form>
-              <form style="display: inline">
-                <input class="MyButton" type="button" value="삭제" 
-                onclick="window.location.href='/projects/delete/{{project.pk}}'" /></form>
-             </span>
-            {% endif %}
-
-
+              {% if user.is_authenticated %}
+              <span class = "btnSet">
+                <form style="display: inline">
+                  <input class="MyButton" type="button" value="수정" 
+                  onclick="window.location.href='/projects/edit/{{project.pk}}'" /></form>
+                <form style="display: inline">
+                  <input class="MyButton" type="button" value="삭제" 
+                  onclick="window.location.href='/projects/delete/{{project.pk}}'" /></form>
+              </span>
+              {% endif %}
         </div>
-
+        {% endif %}
 
 
         <!-- Item // -->

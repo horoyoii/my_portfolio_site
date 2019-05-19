@@ -170,6 +170,7 @@ class Projects(models.Model):
         choices=CLASS_CHOICE,
         default=ETC,
         )
+    show_public = models.BooleanField(default=True)
 
     @property
     def formatted_markdown(self):
