@@ -12,6 +12,12 @@ class SkillsForm(ModelForm):
         model = Skills
         fields=['title', 'grade', 'contents','type']
 
+
+class LectureForm(ModelForm):
+    class Meta:
+        model = Lecture
+        fields=['title', 'sep','grade']        
+
 class MyProfileForm(ModelForm):
     class Meta:
         model = MyProfile

@@ -37,7 +37,7 @@ def profile(request):
         location ='Busan'
     experienceList = Experience.objects.all().order_by('-period') # to use the order by func, needed to import connection from django.db
     skillsList = Skills.objects.all()
-    
+    lectureList = Lecture.objects.all()
     
 
     return render(request, 'mainapp/profile.html', 
@@ -47,6 +47,7 @@ def profile(request):
         'univ' : univ,
         'highSchool' : highSchool,
         'location' : location,
+        'lectureList':lectureList
         })
 
 def projects(request):
@@ -116,6 +117,20 @@ def conn(request):
     return render(request, 'foradmin/index_about_write.html', {'form': form})       
 
 # ==========================================================
+
+
+@login_required
+def profile_lecture_write(request):
+    if request.method == 'POST':
+        form = LectureForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/profile/#education')
+    else:
+        form = LectureForm()
+    return render(request, 'foradmin/index_about_write.html', {'form': form})
+
+
 
 @login_required
 def index_about_write(request):

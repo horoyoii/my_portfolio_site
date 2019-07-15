@@ -31,6 +31,9 @@ urlpatterns = [
     path('profile/skills/edit/<int:pk>', profile_skills_update, name='psu'),
     path('profile/skills/delete/<int:pk>', profile_skills_delete, name='psd'),
     path('profile/myprofile/edit', profile_myprofile_edit, name='pme'),
+    path('profile/lecture/write', profile_lecture_write, name='plw'),
+    
+    
     path('index/about/write', index_about_write, name='iaw'),
     path('index/about/engwrite', index_about_engwrite, name='iaw'),
     path('profile/timeline/edit/<int:pk>', index_about_update, name='iau'),
